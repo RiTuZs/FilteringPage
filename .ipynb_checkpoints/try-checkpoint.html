@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State and Districts</title>
+    <!-- <style>
+        select[multiple] {
+            height: auto;
+            overflow: hidden;
+            padding: 5px; /* Add some padding for better appearance */
+        }
+    </style> -->
+</head>
+<body>
+    <label for="state">Select States:</label>
+    <select id="state" name="state" onchange="updateDistrictOptions()" multiple >
+    <!-- <select id="state" name="state" onchange="updateDistrictOptions()" multiple size="4"> -->
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+    </select>
+
+    <label for="district">District:</label>
+    <select id="district" name="district">
+        <!-- <select id="district" name="district" multiple size="4"> -->
+        <option value="select">---Select the district---</option>
+    </select>
+
+    <script src="try.js"></script>
+</body>
+</html>
