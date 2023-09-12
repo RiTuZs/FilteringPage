@@ -6,42 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find Colleges</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="/static/style.css"> -->
 </head>
 
 <body>
-    <form action="" method="Post">
-        <div>
+    <div>
         <!-- <img src="pictures/copy.png" alt="logo"> -->
-        <h1>Centre for Development of Advanced Computing (C-DAC)</h1>
+        <h1><u>Centre for Development of Advanced Computing (C-DAC)</u></h1>
+    </div>
+    <div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div>
+            {{ message }}
         </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
 
+    
+    <form method="POST" action="/" enctype="multipart/form-data">
+        <h1>Upload Excel File</h1>
+        <input type="file" name="file" accept=".xls, .xlsx">
+        <button type="submit">Upload</button>
+    </form>
+
+    <form action="/filter" method="POST">
         <h2><u>Find Colleges:</u></h2>
 
         <h4 for="state">State:</h4>
         <div id="stateCheckboxes">
-        <input type="checkbox" name="stateCheckbox" id="ArunachalPradesh" value="ArunachalPradesh">
-        <label for="ArunachalPradesh" id="ArunachalPradesh">Arunachal Pradesh</label>
+            <input type="checkbox" name="stateCheckbox" id="ArunachalPradesh" value="ArunachalPradesh">
+            <label for="ArunachalPradesh" onclick= "districtFilter()">Arunachal Pradesh</label>
 
-        <input type="checkbox" name="stateCheckbox" id="assam" value="Assam">
-        <label for="assam" id="assam">Assam</label>
-        
-        <input type="checkbox" name="stateCheckbox" id="manipur" value="Manipur">
-        <label for="manipur">Manipur</label>
-        
-        <input type="checkbox" name="stateCheckbox" id="meghalaya" value="Meghalaya">
-        <label for="meghalaya">Meghalaya</label>
+            <input type="checkbox" name="stateCheckbox" id="Assam" value="Assam">
+            <label for="Assam" onclick= "districtFilter()">Assam</label>
 
-        <input type="checkbox" name="stateCheckbox" id="mizoram" value="Mizoram">
-        <label for="mizoram">Mizoram</label>        
+            <input type="checkbox" name="stateCheckbox" id="manipur" value="Manipur">
+            <label for="manipur" onclick= "districtFilter()">Manipur</label>
+            
+            <input type="checkbox" name="stateCheckbox" id="meghalaya" value="Meghalaya">
+            <label for="meghalaya" onclick= "districtFilter()">Meghalaya</label>
 
-        <input type="checkbox" name="stateCheckbox" id="nagaland" value="Nagaland">
-        <label for="nagaland">Nagaland</label>
+            <input type="checkbox" name="stateCheckbox" id="mizoram" value="Mizoram">
+            <label for="mizoram" onclick= "districtFilter()">Mizoram</label>        
 
-        <input type="checkbox" name="stateCheckbox" id="sikkim" value="Sikkim">
-        <label for="sikkim">Sikkim</label>
+            <input type="checkbox" name="stateCheckbox" id="nagaland" value="Nagaland">
+            <label for="nagaland" onclick= "districtFilter()">Nagaland</label>
 
-        <input type="checkbox" name="stateCheckbox" id="tripura" value="Tripura">
-        <label for="tripura">Tripura</label>
+            <input type="checkbox" name="stateCheckbox" id="sikkim" value="Sikkim">
+            <label for="sikkim" onclick= "districtFilter()">Sikkim</label>
+
+            <input type="checkbox" name="stateCheckbox" id="tripura" value="Tripura">
+            <label for="tripura" onclick= "districtFilter()">Tripura</label>
         </div>
 
         <h4 for="district">District:</h4>
@@ -49,96 +68,48 @@
             <!-- District checkboxes will be generated here dynamically -->
         </div>
 
-        <h4 for="typesofClg">Types of Colleges:</h4>
+        <h4 for="typesofClg">Types of Organization:</h4>
         <div id="clgCheckboxes">
-        <input type="checkbox" name="clgCheckbox" id="Diploma" value="Diploma">
-        <label for="Diploma" id="Diploma">Diploma College</label>
+            <input type="checkbox" name="clgCheckbox" id="Diploma" value="DiplomaCollege" onclick= "collegeFilter()">
+            <label for="Diploma">Diploma College</label>
 
-        <input type="checkbox" name="clgCheckbox" id="Engineering" value="Engineering">
-        <label for="Engineering" id="Engineering">Engineering College</label>
-        
-        <input type="checkbox" name="clgCheckbox" id="ComputerScience" value="ComputerScience">
-        <label for="ComputerScience">Computer Science College</label>
-        
-        <input type="checkbox" name="clgCheckbox" id="Postgraduate" value="Postgraduate">
-        <label for="Postgraduate">Postgraduate College</label>
+            <input type="checkbox" name="clgCheckbox" id="Engineering" value="EngineeringCollege" onclick= "collegeFilter()">
+            <label for="Engineering">Engineering College</label>
+
+            <input type="checkbox" name="clgCheckbox" id="ComputerScience" value="ComputerScienceCollege" onclick= "collegeFilter()">
+            <label for="ComputerScience">Computer Science College</label>
+            
+            <input type="checkbox" name="clgCheckbox" id="Postgraduate" value="PostgraduateCollege" onclick= "collegeFilter()">
+            <label for="Postgraduate">Postgraduate College</label>
+            
+            <input type="checkbox" name="clgCheckbox" id="DgreeCollege" value="DgreeCollege" onclick= "collegeFilter()">
+            <label for="DgreeCollege">Degree College</label>
+
+            <input type="checkbox" name="clgCheckbox" id="EmploymentExchange" value="EmploymentExchangeCollege" onclick= "collegeFilter()">
+            <label for="EmploymentExchange">Employment Exchange College</label>
+            
+            <input type="checkbox" name="clgCheckbox" id="School" value="School" onclick= "collegeFilter()">
+            <label for="School">School</label>
+        </div>
 
         <h4 for="course">Courses:</h4>
         <div id="courseCheckboxes">
-            <!-- District checkboxes will be generated here dynamically -->
+            <!-- Course checkboxes will be generated here dynamically -->
         </div>
-    <br>    
+        <br>
 
-        <button id="find" name="find" onclick="updateSearchResults()">
+        <button type="submit" id="find" name="find">
             <i class="fa fa-search"> Search </i>
         </button>
     </form>
-<br><br>
-    <div id="show" name="show">
-        <table id="collegeTable">
-            <thead>
-                <tr>
-                    <th>Serial No</th>
-                    <th>College Name</th>
-                    <th>State</th>
-                    <th>District</th>
-                    <th>College Type</th>
-                    <th>Course</th>
-                </tr>
-            </thead>
-            <tbody id="result">
-                <tr>
-                    <td>1</td>
-                    <td>ABCD</td>
-                    <td>Assam</td>
-                    <td>Cachar</td>
-                    <td>Engineering</td>
-                    <td>B.Tech + B.E</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>PQRS</td>
-                    <td>Sikkim</td>
-                    <td>Gangtok</td>
-                    <td>Diploma</td>
-                    <td>Polytechnic</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>KGDH</td>
-                    <td>Sikkim</td>
-                    <td>Gangtok</td>
-                    <td>Diploma</td>
-                    <td>Polytechnic</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>LDGT</td>
-                    <td>Sikkim</td>
-                    <td>Gangtok</td>
-                    <td>Diploma</td>
-                    <td>Polytechnic</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>ijkl</td>
-                    <td>Assam</td>
-                    <td>Dibrugarh</td>
-                    <td>Engineering</td>
-                    <td>M.Tech + M.E</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <br><br>
+    {% block content %}
+    <h1>Names of the Colleges:</h1>
+    {{ data | safe }}
+    {% endblock %}
+    <br>
 
-
-    <br><br><br>
-    <h1>Upload Excel File</h1>
-    <form method="POST" action="/" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".xls, .xlsx">
-        <button type="submit">Upload</button>
-    </form>
 </body>
-</html>
 
-<script src="index.js"></script>
+</html>
+<script src="/static/index.js"></script>
