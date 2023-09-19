@@ -27,11 +27,13 @@
     </div>
 
     
-    <form method="POST" action="/" enctype="multipart/form-data">
-        <h1>Upload Excel File</h1>
-        <input type="file" name="file" accept=".xls, .xlsx">
-        <button type="submit">Upload</button>
-    </form>
+    <div class="Upload">
+        <form method="POST" action="/" enctype="multipart/form-data">
+            <h1>Upload Excel File</h1>
+            <input type="file" name="file" accept=".xls, .xlsx">
+            <button type="submit">Upload</button>
+        </form>
+    </div>
 
     <form action="/filter" method="POST">
         <h2><u>Find Colleges:</u></h2>
@@ -79,8 +81,8 @@
             <input type="checkbox" name="clgCheckbox" id="ComputerScience" value="ComputerScienceCollege" onclick= "collegeFilter()">
             <label for="ComputerScience">Computer Science College</label>
             
-            <input type="checkbox" name="clgCheckbox" id="Postgraduate" value="PostgraduateCollege" onclick= "collegeFilter()">
-            <label for="Postgraduate">Postgraduate College</label>
+            <!-- <input type="checkbox" name="clgCheckbox" id="Postgraduate" value="PostgraduateCollege" onclick= "collegeFilter()">
+            <label for="Postgraduate">Postgraduate College</label> -->
             
             <input type="checkbox" name="clgCheckbox" id="DgreeCollege" value="DgreeCollege" onclick= "collegeFilter()">
             <label for="DgreeCollege">Degree College</label>
