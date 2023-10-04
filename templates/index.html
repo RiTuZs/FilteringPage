@@ -1,24 +1,41 @@
+<!-- This HTML code represents a webpage for finding colleges. It includes metadata for character encoding and responsive design, as well as a link to Font Awesome icons. The page has two main sections: one for uploading Excel files and another for filtering colleges by state, district, organization type, and courses. Users can upload Excel files and apply filters to search for colleges. The page likely interacts with a backend for data retrieval and uses JavaScript for client-side functionality. -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the web page -->
     <title>Find Colleges</title>
+
+    <!-- Includes Font Awesome CSS for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet" href="/static/style.css"> -->
+
+    <!-- Include custom CSS from 'style.css' for styling -->
+    <link rel="stylesheet" href="/static/style.css">
+
+    <!-- For flashing Notification -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <div>
-        <!-- <img src="pictures/copy.png" alt="logo"> -->
-        <h1><u>Centre for Development of Advanced Computing (C-DAC)</u></h1>
+    <div class="header">
+        <!-- Heading with an underline -->
+        <h1><u><b>Centre for Development of Advanced Computing,(C-DAC)</b></u></h1>
     </div>
     <div>
+        <!-- Template code using Python/Jinja2 syntax, not standard HTML -->
         {% with messages = get_flashed_messages() %}
+        <!-- Conditional block -->
         {% if messages %}
+        <!-- Looping through messages -->
         {% for message in messages %}
-        <div>
+        <div class="alert alert-success" role="alert">
+            <!-- Displaying a message from the template -->
             {{ message }}
         </div>
         {% endfor %}
@@ -26,20 +43,29 @@
         {% endwith %}
     </div>
 
-    
+    <!-- A div element for the total container -->
+    <div class="container">
+    <!-- A div element for file "Upload" -->
     <div class="Upload">
+        <!-- Form for file upload -->
         <form method="POST" action="/" enctype="multipart/form-data">
-            <h1>Upload Excel File</h1>
-            <input type="file" name="file" accept=".xls, .xlsx">
-            <button type="submit">Upload</button>
+            <h1><u><b>Upload Excel File:- </b></u></h1> <!-- Heading for file upload section -->
+            <input type="file" name="file" accept=".xls, .xlsx"> <!-- File input field allowing only .xls and .xlsx file types -->
+            <button type="submit">Upload</button> <!-- Submit button for file upload form -->
         </form>
     </div>
 
-    <form action="/filter" method="POST">
-        <h2><u>Find Colleges:</u></h2>
+    <!-- Another form for filtering -->
+    <form action="/filter" method="POST" class="find">
+        <!-- Heading for the filter section -->
+        <h2 class="form-heading"><u><b>Find Colleges:- </b></u></h2>
 
-        <h4 for="state">State:</h4>
+        <!-- Sub-heading for selecting state -->
+        <h4 for="state" class="heading"><u>State:</u></h4>
+        <!-- A div to hold checkboxes for states -->
         <div id="stateCheckboxes">
+
+            <!-- Checkboxes for different states with labels and onclick events -->
             <input type="checkbox" name="stateCheckbox" id="ArunachalPradesh" value="ArunachalPradesh">
             <label for="ArunachalPradesh" onclick= "districtFilter()">Arunachal Pradesh</label>
 
@@ -65,13 +91,18 @@
             <label for="tripura" onclick= "districtFilter()">Tripura</label>
         </div>
 
-        <h4 for="district">District:</h4>
+        <!-- Sub-heading for selecting district -->
+        <h4 for="district" class="heading"><u>District:</u></h4>
         <div id="districtCheckboxes">
             <!-- District checkboxes will be generated here dynamically -->
         </div>
 
-        <h4 for="typesofClg">Types of Organization:</h4>
+        <!-- Sub-heading for selecting types of organizations -->
+        <h4 for="typesofClg" class="heading"><u>Types of Organization:</u></h4>
+        <!-- A div to hold checkboxes for types of organizations -->
         <div id="clgCheckboxes">
+
+            <!-- Checkboxes for different types of organizations with labels and onclick events -->
             <input type="checkbox" name="clgCheckbox" id="Diploma" value="DiplomaCollege" onclick= "collegeFilter()">
             <label for="Diploma">Diploma College</label>
 
@@ -80,9 +111,6 @@
 
             <input type="checkbox" name="clgCheckbox" id="ComputerScience" value="ComputerScienceCollege" onclick= "collegeFilter()">
             <label for="ComputerScience">Computer Science College</label>
-            
-            <!-- <input type="checkbox" name="clgCheckbox" id="Postgraduate" value="PostgraduateCollege" onclick= "collegeFilter()">
-            <label for="Postgraduate">Postgraduate College</label> -->
             
             <input type="checkbox" name="clgCheckbox" id="DgreeCollege" value="DgreeCollege" onclick= "collegeFilter()">
             <label for="DgreeCollege">Degree College</label>
@@ -94,24 +122,29 @@
             <label for="School">School</label>
         </div>
 
-        <h4 for="course">Courses:</h4>
+        <!-- Sub-heading for selecting courses -->
+        <h4 for="course" class="heading"><u>Courses:</u></h4>
         <div id="courseCheckboxes">
             <!-- Course checkboxes will be generated here dynamically -->
         </div>
         <br>
 
+        <!-- Submit button for the filter form -->
         <button type="submit" id="find" name="find">
+            <!-- Icon and text on the button -->
             <i class="fa fa-search"> Search </i>
         </button>
     </form>
     <br><br>
-    {% block content %}
-    <h1>Names of the Colleges:</h1>
-    {{ data | safe }}
-    {% endblock %}
+    {% block content %} <!-- Template block named "content" -->
+    <h1><u><b>Names of the Organizations:- </b></u></h1> <!-- Heading for displaying college names -->
+    {{ data | safe }} <!-- Template variable "data" is displayed with HTML markup allowed (safe) -->
+    {% endblock %} <!-- End of "content" block -->
     <br>
-
+    </div>
 </body>
 
 </html>
+
+<!-- JavaScript script source -->
 <script src="/static/index.js"></script>
